@@ -32,6 +32,11 @@ public class LoginListener implements Listener {
 
     @EventHandler(priority = EventPriority.HIGH, ignoreCancelled = true)
     public void onLogin(AsyncPlayerPreLoginEvent event) {
+        if (!plugin.isUblEnabled()) {
+            event.allow();
+            return;
+        }
+
         if (!plugin.isReady()) {
             // AsyncPreLogin always gets fired on an User Authentifactor thread,
             // using Thread.sleep() won't kill the server.
@@ -68,7 +73,7 @@ public class LoginListener implements Listener {
         }
         if (plugin.isBanned(event.getName())) {
             event.disallow(AsyncPlayerPreLoginEvent.Result.KICK_BANNED,
-                    ChatColor.translateAlternateColorCodes('&', plugin.getBanMessage(event.getName()))
+                    ChatColor.translateAlternateColorCodes('&', "&cThe UBL is enabled and you are on it!")
             );
         }
     }

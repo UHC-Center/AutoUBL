@@ -29,6 +29,7 @@ public class AutoUBL extends MultiThreadedJavaPlugin {
     private Map<UUID, BanEntry> banlistByUUID;
     private Set<String> exempt;
     private StringTemplate banMessageTemplate;
+    private boolean ublEnabled = false;
 
     @Override
     public void onEnable() {
@@ -51,12 +52,12 @@ public class AutoUBL extends MultiThreadedJavaPlugin {
             public void run() {
                 getLogger().info("Configuration reloaded, checking UBL for updates");
                 FileConfiguration config = getConfig();
-                try {
+                /*try {
                     String banMessage = config.getString("ban-message", "UBL - {Reason} - {Courtroom Post}");
                     banMessageTemplate = StringTemplate.getStringTemplate(banMessage);
                 } catch (IllegalArgumentException ex) {
                     new InvalidConfigurationException("Invalid ban-message", ex).printStackTrace();
-                }
+                }*/
                 exempt = new HashSet<>(config.getStringList("exempt"));
                 int autoCheckInterval = config.getInt("auto-check-interval", 60);
                 if (autoCheckInterval > 0) {
@@ -253,4 +254,7 @@ public class AutoUBL extends MultiThreadedJavaPlugin {
         }
         return uuidFieldName;
     }
+
+    public boolean isUblEnabled() { return ublEnabled; }
+    public void setUblEnabled(boolean ublEnabled) { this.ublEnabled = ublEnabled; }
 }

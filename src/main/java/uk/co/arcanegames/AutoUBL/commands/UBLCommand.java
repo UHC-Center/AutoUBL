@@ -7,10 +7,7 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import uk.co.arcanegames.AutoUBL.AutoUBL;
-import uk.co.arcanegames.AutoUBL.commands.ubl.ExemptCommand;
-import uk.co.arcanegames.AutoUBL.commands.ubl.ReloadCommand;
-import uk.co.arcanegames.AutoUBL.commands.ubl.UnexemptCommand;
-import uk.co.arcanegames.AutoUBL.commands.ubl.UpdateCommand;
+import uk.co.arcanegames.AutoUBL.commands.ubl.*;
 
 /**
  * The base for all UBL commands
@@ -29,6 +26,7 @@ public class UBLCommand implements CommandExecutor {
         subCommands.put("unexempt", new UnexemptCommand(plugin));
         subCommands.put("update", new UpdateCommand(plugin));
         subCommands.put("reload", new ReloadCommand(plugin));
+        subCommands.put("toggle", new ToggleCommand(plugin));
     }
 
     @Override

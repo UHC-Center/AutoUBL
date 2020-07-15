@@ -1,7 +1,8 @@
-name: ${project.name}
-main: ${project.groupId}.${project.artifactId}.${project.name}
-version: ${project.version}
-description: ${project.description}
+name: AutoUBL
+main: uk.co.arcanegames.AutoUBL.AutoUBL
+version: "1.0"
+description: "AutoUBL for UHC Center"
+author: "XHawk87 x UHC Center"
 
 commands:
   ubl:
@@ -17,4 +18,7 @@ permissions:
     default: op
   autoubl.commands.reload:
     description: Allows use of the /ubl reload command
+    default: op
+  autobl.commands.toggle:
+    description: Allows use of the /ubl toggle command
     default: op
