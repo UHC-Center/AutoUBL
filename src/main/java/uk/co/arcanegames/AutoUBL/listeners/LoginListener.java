@@ -3,6 +3,7 @@ package uk.co.arcanegames.AutoUBL.listeners;
 import java.util.UUID;
 import java.util.logging.Level;
 
+import center.uhc.core.commons.Message;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.event.EventHandler;
@@ -43,7 +44,7 @@ public class LoginListener implements Listener {
             boolean proceed = waitUntilReady();
             if (!proceed) {
                 event.disallow(AsyncPlayerPreLoginEvent.Result.KICK_OTHER,
-                        "AutoUBL was disabled during initialization of banlist"
+                        Message.formatSystem(ChatColor.RED, "AutoUBL", "One moment please, the UBL isn't ready.")
                 );
                 return;
             }
@@ -66,7 +67,7 @@ public class LoginListener implements Listener {
                     }
                 } catch (Exception ex1) { // The UUID could not be located, server down or not a real account
                     plugin.getLogger().log(Level.WARNING, "Failed to lookup UUID of " + event.getName(), ex1);
-                    event.disallow(AsyncPlayerPreLoginEvent.Result.KICK_OTHER, "Authentication failed due to " + ex1.getLocalizedMessage());
+                    event.disallow(AsyncPlayerPreLoginEvent.Result.KICK_OTHER, Message.formatSystem(ChatColor.RED, "AutoUBL", "Authentication Error. Please contact an admin§r\n\n§cError: " + ex1.getLocalizedMessage()));
                 }
                 return;
             }

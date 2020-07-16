@@ -1,5 +1,7 @@
 package uk.co.arcanegames.AutoUBL.commands.ubl;
 
+import center.uhc.core.commons.Message;
+import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import uk.co.arcanegames.AutoUBL.AutoUBL;
@@ -20,7 +22,7 @@ public class UnexemptCommand implements IUBLCommand {
 
     @Override
     public String getUsage() {
-        return "/unexempt [player] - Removes a player to the exempt list so that they cannot join the server if they are on the UBL";
+        return "/unexempt <player>";
     }
 
     @Override
@@ -42,9 +44,9 @@ public class UnexemptCommand implements IUBLCommand {
 
         String playerName = args[0];
         if (plugin.unexempt(playerName)) {
-            sender.sendMessage(playerName + " is no longer exempt from the UBL on this server");
+            sender.sendMessage(Message.formatSystem(ChatColor.GREEN, "AutoUBL", playerName + " is no longer exempt from the UBL on this server!"));
         } else {
-            sender.sendMessage(playerName + " is not exempt from the UBL on this server");
+            sender.sendMessage(Message.formatSystem(ChatColor.RED, "AutoUBL", playerName + " is not exempt from the UBL on this server!"));
         }
         return true;
     }

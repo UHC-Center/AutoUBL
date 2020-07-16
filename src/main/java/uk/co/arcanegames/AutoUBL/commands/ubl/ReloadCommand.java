@@ -1,5 +1,7 @@
 package uk.co.arcanegames.AutoUBL.commands.ubl;
 
+import center.uhc.core.commons.Message;
+import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import uk.co.arcanegames.AutoUBL.AutoUBL;
@@ -20,7 +22,7 @@ public class ReloadCommand implements IUBLCommand {
 
     @Override
     public String getUsage() {
-        return "/ubl reload - Reload AutoUBL settings from the config.yml and update the banlist";
+        return "/ubl reload";
     }
 
     @Override
@@ -34,7 +36,7 @@ public class ReloadCommand implements IUBLCommand {
             return false; // Expected no args
         }
         plugin.reload();
-        sender.sendMessage("AutoUBL config is reloading");
+        Message.formatSystem(ChatColor.YELLOW, "AutoUBL", "We are now reloading the AutoUBL config!");
         return true;
     }
 }

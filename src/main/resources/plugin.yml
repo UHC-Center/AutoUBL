@@ -3,6 +3,8 @@ main: uk.co.arcanegames.AutoUBL.AutoUBL
 version: "1.0"
 description: "AutoUBL for UHC Center"
 author: "XHawk87 x UHC Center"
+depend:
+  - ProtocolLib
 
 commands:
   ubl:

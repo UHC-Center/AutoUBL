@@ -1,5 +1,7 @@
 package uk.co.arcanegames.AutoUBL.commands.ubl;
 
+import center.uhc.core.commons.Message;
+import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import uk.co.arcanegames.AutoUBL.AutoUBL;
@@ -20,7 +22,7 @@ public class ExemptCommand implements IUBLCommand {
 
     @Override
     public String getUsage() {
-        return "/exempt [player] - Adds a player to the exempt list so that they can join the server even if they are on the UBL";
+        return "/exempt <player>";
     }
 
     @Override
@@ -32,7 +34,7 @@ public class ExemptCommand implements IUBLCommand {
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
         // If there are no args or the "help" keyword is used, display the usage message
         if (args.length == 0 || args.length == 1 && args[0].equalsIgnoreCase("help")) {
-            sender.sendMessage(getUsage());
+            sender.sendMessage(Message.formatSystem(ChatColor.RED, "Error", "Correct Usage: " + getUsage()));
             return true;
         }
 
@@ -42,9 +44,9 @@ public class ExemptCommand implements IUBLCommand {
 
         String playerName = args[0];
         if (plugin.exempt(playerName)) {
-            sender.sendMessage(playerName + " is now exempt from the UBL on this server");
+            sender.sendMessage(Message.formatSystem(ChatColor.GREEN, "AutoUBL", playerName + " is now exempt from the UBL on this server!"));
         } else {
-            sender.sendMessage(playerName + " is already exempt from the UBL on this server");
+            sender.sendMessage(Message.formatSystem(ChatColor.RED, "Error", playerName + " is already exempt from the UBL on this server!"));
         }
         return true;
     }

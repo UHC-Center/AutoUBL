@@ -3,6 +3,9 @@ package uk.co.arcanegames.AutoUBL.commands;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
+
+import center.uhc.core.commons.Message;
+import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -34,10 +37,11 @@ public class UBLCommand implements CommandExecutor {
         // It is assumed that entering the menu command without parameters is an
         // attempt to get information about it. So let's give it to them.
         if (args.length == 0) {
+            sender.sendMessage(Message.formatSystem(ChatColor.RED, "Error", "Correct Usage:"));
             for (IUBLCommand menuCommand : subCommands.values()) {
                 String permission = menuCommand.getPermission();
                 if (permission != null && sender.hasPermission(permission)) {
-                    sender.sendMessage(menuCommand.getUsage());
+                    sender.sendMessage("" + ChatColor.RED + menuCommand.getUsage());
                 }
             }
             return true;
@@ -51,13 +55,13 @@ public class UBLCommand implements CommandExecutor {
         // Handle the permissions check
         String permission = ublCommand.getPermission();
         if (permission != null && !sender.hasPermission(permission)) {
-            sender.sendMessage("You do not have permission to use this command");
+            sender.sendMessage(Message.formatSystem(ChatColor.RED, "Error", "No permission."));
             return true;
         }
         // Remove the sub-command from the args list and pass along the rest
         if (!ublCommand.onCommand(sender, command, label, Arrays.copyOfRange(args, 1, args.length))) {
             // A sub-command returning false should display the usage information for that sub-command
-            sender.sendMessage(ublCommand.getUsage());
+            sender.sendMessage(Message.formatSystem(ChatColor.RED, "Error", "Correct Usage: " + ublCommand.getUsage()));
         }
         return true;
     }

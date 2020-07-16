@@ -1,5 +1,7 @@
 package uk.co.arcanegames.AutoUBL.commands.ubl;
 
+import center.uhc.core.commons.Message;
+import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import uk.co.arcanegames.AutoUBL.AutoUBL;
@@ -20,7 +22,7 @@ public class UpdateCommand implements IUBLCommand {
 
     @Override
     public String getUsage() {
-        return "/ubl update - Update the banlist from the banlist-url immediately";
+        return "/ubl update";
     }
 
     @Override
@@ -35,7 +37,7 @@ public class UpdateCommand implements IUBLCommand {
         }
 
         plugin.updateBanlist();
-        sender.sendMessage("Checking the UBL for updates");
+        sender.sendMessage(Message.formatSystem(ChatColor.GREEN, "AutoUBL", "Updating the UBL banlist!"));
         return true;
     }
 }
