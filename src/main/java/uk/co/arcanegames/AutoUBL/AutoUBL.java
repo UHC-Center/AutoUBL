@@ -10,6 +10,7 @@ import java.util.Set;
 import java.util.UUID;
 import org.bukkit.configuration.InvalidConfigurationException;
 import org.bukkit.configuration.file.FileConfiguration;
+import org.bukkit.plugin.PluginDescriptionFile;
 import org.bukkit.scheduler.BukkitRunnable;
 import uk.co.arcanegames.AutoUBL.commands.UBLCommand;
 import uk.co.arcanegames.AutoUBL.listeners.LoginListener;
@@ -29,7 +30,9 @@ public class AutoUBL extends MultiThreadedJavaPlugin {
     private Map<UUID, BanEntry> banlistByUUID;
     private Set<String> exempt;
     private StringTemplate banMessageTemplate;
-    private boolean ublEnabled = false;
+    private boolean ublEnabled = true;
+
+    public static String version;
 
     @Override
     public void onEnable() {
@@ -38,6 +41,8 @@ public class AutoUBL extends MultiThreadedJavaPlugin {
         reload();
         getCommand("ubl").setExecutor(new UBLCommand(this));
         new LoginListener().registerEvents(this);
+        PluginDescriptionFile pdf = this.getDescription();
+        version = pdf.getVersion();
     }
 
     /**

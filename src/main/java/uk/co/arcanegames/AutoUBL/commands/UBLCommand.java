@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import center.uhc.core.commons.Message;
+import center.uhc.core.commons.center.Centered;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -37,12 +38,26 @@ public class UBLCommand implements CommandExecutor {
         // It is assumed that entering the menu command without parameters is an
         // attempt to get information about it. So let's give it to them.
         if (args.length == 0) {
+            boolean sent = false;
             sender.sendMessage(Message.formatSystem(ChatColor.RED, "Error", "Correct Usage:"));
             for (IUBLCommand menuCommand : subCommands.values()) {
                 String permission = menuCommand.getPermission();
                 if (permission != null && sender.hasPermission(permission)) {
+                    sent = true;
                     sender.sendMessage("" + ChatColor.RED + menuCommand.getUsage());
                 }
+            }
+
+            if (!sent) {
+                sender.sendMessage(Centered.create("§8»§m--------------------§r§8«"));
+                sender.sendMessage(Centered.create("§c§lAuto UBL §8(§7" + AutoUBL.version + "§8)"));
+                sender.sendMessage(Centered.create("A fixed version of the AutoUBL plugin"));
+                sender.sendMessage(Centered.create("It broke our server, so we redid it ourselves"));
+                sender.sendMessage(" ");
+                sender.sendMessage(Centered.create("Yes, we use the UBL"));
+                sender.sendMessage(" ");
+                sender.sendMessage(Centered.create("§aBy XHawk87 & UHC Center"));
+                sender.sendMessage(Centered.create("§8»§m--------------------§r§8«"));
             }
             return true;
         }
