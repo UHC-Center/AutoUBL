@@ -22,7 +22,7 @@ public class ExemptCommand implements IUBLCommand {
 
     @Override
     public String getUsage() {
-        return "/exempt <player>";
+        return "/ubl exempt <player>";
     }
 
     @Override

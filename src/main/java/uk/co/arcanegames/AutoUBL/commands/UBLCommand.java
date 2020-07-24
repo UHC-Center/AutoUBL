@@ -25,12 +25,16 @@ public class UBLCommand implements CommandExecutor {
      */
     private Map<String, IUBLCommand> subCommands = new HashMap<>();
 
+    private AutoUBL plugin;
+
     public UBLCommand(AutoUBL plugin) {
+        this.plugin = plugin;
         subCommands.put("exempt", new ExemptCommand(plugin));
         subCommands.put("unexempt", new UnexemptCommand(plugin));
         subCommands.put("update", new UpdateCommand(plugin));
         subCommands.put("reload", new ReloadCommand(plugin));
         subCommands.put("toggle", new ToggleCommand(plugin));
+        subCommands.put("status", new StatusCommand(plugin));
     }
 
     @Override
@@ -54,9 +58,9 @@ public class UBLCommand implements CommandExecutor {
                 sender.sendMessage(Centered.create("A fixed version of the AutoUBL plugin"));
                 sender.sendMessage(Centered.create("It broke our server, so we redid it ourselves"));
                 sender.sendMessage(" ");
-                sender.sendMessage(Centered.create("Yes, we use the UBL"));
+                sender.sendMessage(Centered.create("UBL Status: " + (plugin.isUblEnabled() ? "§aEnabled" : "§cDisabled")));
                 sender.sendMessage(" ");
-                sender.sendMessage(Centered.create("§aBy XHawk87 & UHC Center"));
+                sender.sendMessage(Centered.create("§aCreated by XHawk87, edited by Gabrlella"));
                 sender.sendMessage(Centered.create("§8»§m--------------------§r§8«"));
             }
             return true;

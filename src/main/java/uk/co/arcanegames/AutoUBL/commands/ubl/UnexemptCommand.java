@@ -22,7 +22,7 @@ public class UnexemptCommand implements IUBLCommand {
 
     @Override
     public String getUsage() {
-        return "/unexempt <player>";
+        return "/ubl unexempt <player>";
     }
 
     @Override
