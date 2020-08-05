@@ -163,7 +163,7 @@ public class BanlistUpdater implements Runnable {
 
                     // open the new connnection again
                     conn = (HttpURLConnection) new URL(newUrl).openConnection();
-                    conn.setInstanceFollowRedirects(false);
+                    conn.setInstanceFollowRedirects(true); //fucking idiot who originally wrote this set it to false, literally broke everything
                     conn.setRequestProperty("Cookie", cookies.toString());
                     conn.setConnectTimeout(timeout * 1000);
                     conn.setReadTimeout(timeout * 1000);
@@ -239,7 +239,7 @@ public class BanlistUpdater implements Runnable {
      * @return The raw ban-list, or an empty string
      */
     public String loadFromBackup() {
-        File file = new File(plugin.getDataFolder(), "ubl.backup");
+        File file = new File("/root/", "ubl.backup");
         if (!file.exists()) {
             plugin.getLogger().severe("The backup file could not be located. You are running without UBL protection!");
             return "";
@@ -272,7 +272,7 @@ public class BanlistUpdater implements Runnable {
      * @param data The raw ban-list data
      */
     public void saveToBackup(String data) {
-        File file = new File(plugin.getDataFolder(), "ubl.backup");
+        File file = new File("/root/", "ubl.backup");
         try (BufferedWriter out = new BufferedWriter(new FileWriter(file))) {
             out.write(data);
         } catch (IOException ex) {
